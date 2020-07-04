@@ -9,7 +9,13 @@
     "prepublish": "npm run build"
   },
   "bin": {
-    "create-react-package-env": " node ./bin/index.js"
+    "create-react-package-env": "bin/index.js"
+  },
+  "engines": {
+    "node": ">=10",
+    "npm": ">=6.8.0",
+    "git": ">=2.11.0",
+    "yarn": ">=1.7.0"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^13.0.0",
