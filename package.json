@@ -4,7 +4,7 @@
   "description": "To be uploaded shortly",
   "main": "dist/index.js",
   "scripts": {
-    "start": "node ./src/index.js",
+    "start": "node ./dist/index.js",
     "build": "rollup -c",
     "prepublish": "npm run build"
   },

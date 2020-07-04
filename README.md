@@ -12,11 +12,12 @@ Run the following command for creating your package name environament.
 
 These option has to be specified after the package name
 
-| option                 | for                                               |
-| ---------------------- | ------------------------------------------------- |
-| `-t` or `--typescript` | creates project with typescript support           |
-| `-o` or `-open`        | opens VS Code after project setup                 |
-| `-n` or `-npm`         | uses npm instead of yarn for modules installation |
+| option                    | for                                               |
+| ------------------------- | ------------------------------------------------- |
+| `-t` or `--typescript`    | creates project with typescript support           |
+| `-o` or `-open`           | opens VS Code after project setup                 |
+| `-n` or `-npm`            | uses npm instead of yarn for modules installation |
+| `-si` or `--skip-install` | skips installation of modules                     |
 
 #### Raising Issues and PRs are heartly welcomed.
 

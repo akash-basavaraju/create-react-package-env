@@ -8,7 +8,20 @@ import fs from "fs";
   const BABEL_REPO =
     "https://github.com/akash-basavaraju/react-package-dev-babel.git";
 
-  const [packageName, ...options] = process.argv.slice(2);
+  const [packageName, ...options] = process.argv.filter((arg) => {
+    return !(
+      arg.includes("/node") ||
+      arg.includes("sudo") ||
+      arg.includes("create-react-package-env")
+    );
+  });
+
+  const isSkipInstall =
+    options.includes("-si") || options.includes("--skip-install");
+  const isTypescript =
+    options.includes("-t") || options.includes("--typescript");
+  const isOpenCode = options.includes("-o") || options.includes("--open");
+  const isNpmInstall = options.includes("-n") || options.includes("-npm");
 
   if (!packageName) {
     console.log(chalk.red("Please specify the package name"));
@@ -38,11 +51,7 @@ import fs from "fs";
   }
 
   await execShellCommand(
-    `git clone ${
-      options.includes("-t") || options.includes("--typescript")
-        ? TYPESCRIPT_REPO
-        : BABEL_REPO
-    } ${packageName}`,
+    `git clone ${isTypescript ? TYPESCRIPT_REPO : BABEL_REPO} ${packageName}`,
     "Cloning the repo...",
     "Error occurred while cloning the repo"
   );
@@ -83,36 +92,38 @@ import fs from "fs";
     true
   );
 
-  if (yarnCheck === "Failed") {
-    console.log(chalk.yellow("Using npm for installation."));
-  } else {
-    console.log(
-      chalk.yellow(
-        "Using yarn for installation. Use '-n' or '-npm' for npm installation."
-      )
-    );
+  if (!isSkipInstall) {
+    if (yarnCheck === "Failed") {
+      console.log(chalk.yellow("Using npm for installation."));
+    } else {
+      console.log(
+        chalk.yellow(
+          "Using yarn for installation. Use '-n' or '-npm' for npm installation."
+        )
+      );
+    }
   }
 
-  await execShellCommand(
-    `cd ./${packageName} && ${
-      yarnCheck === "Failed" ||
-      options.includes("-n") ||
-      options.includes("-npm")
-        ? "npm install"
-        : "yarn"
-    }`,
-    "Installing packages (this takes time) ...",
-    "Error while installing packages"
-  );
+  if (!isSkipInstall) {
+    await execShellCommand(
+      `cd ./${packageName} && ${
+        yarnCheck === "Failed" || isNpmInstall ? "npm install" : "yarn"
+      }`,
+      "Installing packages (this takes time) ...",
+      "Error while installing packages"
+    );
+  } else {
+    console.log(chalk.yellow("Skipped package installation"));
+  }
 
-  if (options.includes("-o") || options.includes("--open")) {
+  if (isOpenCode) {
     await execShellCommand(
       `code ./${packageName}`,
       "Opening VS Code...",
       "Error while Opening VS Code"
     );
   } else {
-    console.log(chalk.blue("Use '-o' or '--open' for opening VS Code."));
+    console.log(chalk.yellow("Use '-o' or '--open' for opening VS Code."));
   }
   console.log(chalk.blue("Done! Happy Coding."));
 })();
