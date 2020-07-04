@@ -23,6 +23,7 @@
     "eslint": "^7.4.0",
     "prettier": "^2.0.5",
     "rollup": "^2.18.2",
+    "rollup-plugin-add-shebang": "^0.3.1",
     "rollup-plugin-delete": "^2.0.0",
     "rollup-plugin-terser": "^6.1.0"
   },
