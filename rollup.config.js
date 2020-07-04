@@ -5,9 +5,9 @@ import { terser } from "rollup-plugin-terser";
 
 export default {
   input: "./src/index.js",
-  output: { file: "dist/index.js", format: "cjs" },
+  output: { file: "bin/index.js", format: "cjs" },
   plugins: [
-    del({ targets: "dist/*" }),
+    del({ targets: "bin/*" }),
     resolve(),
     commonToES6({ include: "node_modules/**" }),
     terser(),
