@@ -1,6 +1,6 @@
 {
   "name": "create-react-package-env",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "This is cli tool for generating environement with dev server that creates react package.",
   "main": "src/index.js",
   "scripts": {
