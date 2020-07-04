@@ -80,7 +80,7 @@ import fs from "fs";
   }
 
   await execShellCommand(
-    `cd ${packageName} && rm -rf .git && git init`,
+    `cd ${packageName} && rm -rf .git && git init && git add . && git commit -m 'Initial Commit'`,
     "Resetting git...",
     "Error while resetting git"
   );
