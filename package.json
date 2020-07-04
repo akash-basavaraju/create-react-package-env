@@ -1,6 +1,6 @@
 {
   "name": "create-react-package-env",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "To be uploaded shortly",
   "main": "dist/index.js",
   "scripts": {
