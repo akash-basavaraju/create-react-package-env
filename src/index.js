@@ -29,7 +29,7 @@ import fs from "fs";
   }
 
   function execShellCommand(cmd, info, errorMsg, isChecking = false) {
-    console.log(chalk.blue(info));
+    console.log(chalk.blueBright(info));
     return new Promise((resolve) => {
       exec(cmd, (error, stderr, stdout) => {
         if (error) {
@@ -57,7 +57,7 @@ import fs from "fs";
   );
 
   try {
-    console.log(chalk.blue("Cleaning the package..."));
+    console.log(chalk.blueBright("Cleaning the package..."));
     const jsonRaw = fs.readFileSync(`./${packageName}/package.json`);
     const packageJsonObj = JSON.parse(jsonRaw);
     packageJsonObj.name = packageName;
@@ -72,7 +72,7 @@ import fs from "fs";
     fs.unlinkSync(`./${packageName}/package.json`);
     fs.writeFileSync(
       `./${packageName}/package.json`,
-      JSON.stringify(packageJsonObj)
+      JSON.stringify(packageJsonObj, undefined, 4)
     );
   } catch (err) {
     console.log(chalk.red("Error Occurred while applying the package name"));
@@ -125,5 +125,5 @@ import fs from "fs";
   } else {
     console.log(chalk.yellow("Use '-o' or '--open' for opening VS Code."));
   }
-  console.log(chalk.blue("Done! Happy Coding."));
+  console.log(chalk.blueBright("Done! Happy Coding."));
 })();
